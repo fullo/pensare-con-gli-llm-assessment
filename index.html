@@ -208,7 +208,7 @@ const ASSESSMENTS = {
           "Si controlla «a occhio», senza metodo.",
           "C'è una checklist informale.",
           "Protocollo formale, ma non sempre applicato.",
-          "Protocollo formale + traccia documentale per ogni output."
+          "Protocollo calibrato sul costo dell'errore, con traccia documentale."
         ]
       },
       {
@@ -226,13 +226,13 @@ const ASSESSMENTS = {
       {
         dim: "Soglia",
         q: "Quando vi fermate?",
-        sub: "Avete sentinel — metriche, eventi, segnali — che vi dicono quando fermare o ricalibrare l'uso dell'LLM su un caso d'uso?",
+        sub: "Avete sentinel — eventi osservabili, domande di retrospettiva, soglie di rinuncia — che vi dicano quando fermare o ricalibrare l'uso dell'LLM su un caso d'uso?",
         scale: [
           "Nessuna soglia, si va finché non scoppia qualcosa.",
           "Ci si ferma solo dopo lamentele esplicite.",
           "Review trimestrale, post-hoc.",
-          "KPI definiti con threshold di allerta.",
-          "Sentinel + procedura di stop documentata e provata."
+          "Domande di retrospettiva ricorrenti sulle decisioni AI-assisted.",
+          "Sentinel di rinuncia documentate (almeno una osservabile in giorni o euro) + procedura di stop provata."
         ]
       }
     ],
@@ -269,7 +269,7 @@ const ASSESSMENTS = {
           "Solo se intuisco un problema.",
           "A volte, in modo improvvisato.",
           "Spesso, in modo strutturato.",
-          "Sempre, con un metodo (CoVe, triade abduzione/deduzione/induzione)."
+          "Sempre, con un metodo (CoV, triade deduttiva/induttiva/abduttiva)."
         ]
       },
       {

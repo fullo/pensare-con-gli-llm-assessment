@@ -13,7 +13,7 @@ I descrittori completi della scala da 1 a 5 li vedi quando fai il check vero e p
 1. **Delega.** Cosa stiamo delegando al modello, e con quale regola scritta? Qualcuno, in azienda, sa dire dove finisce l'umano e dove comincia il modello.
 2. **Verifica.** Come controlliamo un output prima di accettarlo? Quando l'output è critico — esce al cliente, va in produzione, finisce in un documento firmato — c'è un protocollo, o si va a fiducia.
 3. **Responsabilità.** Chi firma, con nome e cognome? Per ogni cosa che esce dall'organizzazione c'è una persona identificabile che la sosterrebbe in pubblico.
-4. **Soglia.** Quando ci fermiamo? Esistono indicatori — eventi, metriche, segnali — che ci dicono che è il momento di ricalibrare o di smettere su un certo caso d'uso.
+4. **Soglia.** Quando ci fermiamo? Esistono sentinel — eventi osservabili, domande di retrospettiva, soglie di rinuncia — che ci dicono che è il momento di ricalibrare o di smettere su un certo caso d'uso.
 
 Le prime tre dicono come stai usando il modello. La quarta dice se sapresti accorgerti che non sta funzionando.
 
