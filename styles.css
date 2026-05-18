@@ -65,6 +65,63 @@ header.site nav a.nav-btn:hover {
   color: white;
 }
 
+/* ===== INDICE DEI CAPITOLI (sulla landing) ===== */
+.chapter-index {
+  margin: 40px 0 24px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255,255,255,0.5);
+}
+.chapter-index h2 {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  margin: 0 0 4px;
+  font-weight: 700;
+}
+.chapter-index .sub {
+  color: var(--ink-soft);
+  font-size: 14px;
+  margin: 0 0 18px;
+}
+.chapter-index ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2px;
+}
+@media (min-width: 680px) {
+  .chapter-index ol { grid-template-columns: 1fr 1fr; gap: 2px 20px; }
+}
+.chapter-index li { margin: 0; }
+.chapter-index a {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+.chapter-index a:hover { background: var(--accent-soft); }
+.chapter-index .num {
+  flex: 0 0 24px;
+  color: var(--accent);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  font-size: 14px;
+}
+.chapter-index .title {
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 500;
+}
+.chapter-index a:hover .title { color: var(--accent); }
+
 /* Mini link inline per richiami contestuali (es. nella buy CTA o sotto un'azione) */
 .inline-cta {
   display: inline-block;
