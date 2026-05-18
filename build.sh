@@ -60,6 +60,7 @@ for (( i=0; i<n; i++ )); do
     --template="$TEMPLATE" \
     --metadata pagetitle="$title" \
     --metadata chapterlabel="$label" \
+    --metadata slug="$slug" \
     --metadata description="$title — un estratto dal libro «Pensare con gli LLM, the Right Way» di Francesco Fullone." \
     --metadata prev="$prev" \
     --metadata prevtitle="$prev_title" \
