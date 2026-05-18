@@ -1,0 +1,34 @@
+MIT License — Codice dell'app
+
+Copyright (c) 2026 Francesco Fullone — Daruma Consulting
+
+Si concede gratuitamente l'autorizzazione, a chiunque ne ottenga copia
+di questo software e dei file di documentazione associati (il "Software"),
+di trattare il Software senza restrizioni, inclusi senza limitazione i
+diritti di usare, copiare, modificare, fondere, pubblicare, distribuire,
+sub-licenziare e/o vendere copie del Software, e di permettere alle persone
+a cui il Software è fornito di farlo, alle seguenti condizioni:
+
+L'avviso di copyright sopra riportato e questo avviso di autorizzazione
+devono essere inclusi in tutte le copie o parti sostanziali del Software.
+
+IL SOFTWARE È FORNITO "COSÌ COM'È", SENZA GARANZIA DI ALCUN TIPO, ESPRESSA
+O IMPLICITA, INCLUSO MA NON LIMITATO LE GARANZIE DI COMMERCIABILITÀ,
+IDONEITÀ PER UN PARTICOLARE SCOPO E NON-VIOLAZIONE. IN NESSUN CASO GLI
+AUTORI O I TITOLARI DEL COPYRIGHT SARANNO RITENUTI RESPONSABILI PER QUALSIASI
+RECLAMO, DANNO O ALTRA RESPONSABILITÀ, SIA IN UN'AZIONE DI CONTRATTO,
+TORTO O ALTRIMENTI, DERIVANTE DA, FUORI O IN CONNESSIONE CON IL SOFTWARE
+O L'USO O ALTRE TRATTAZIONI NEL SOFTWARE.
+
+---
+
+NOTA — Contenuti del libro (file `book/*.md`)
+
+I contenuti markdown nella cartella `book/` sono rilasciati sotto licenza
+**Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International**
+(CC BY-NC-SA 4.0). Testo completo: https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.it
+
+Sono attribuiti a:
+
+  Francesco Fullone — *Pensare con gli LLM, the Right Way*
+  Daruma Consulting · 2026

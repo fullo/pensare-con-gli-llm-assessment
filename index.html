@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pensare con LLM — Self-Assessment</title>
+<meta name="description" content="Due self-check gratuiti basati sul libro «Pensare con gli LLM, the Right Way». 5 minuti, 4 domande, un punteggio." />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div class="container">
+
+  <header class="site">
+    <div class="brand">Pensare con LLM <span class="dot">·</span> Self-Assessment</div>
+    <nav>
+      <a href="book/00-introduzione.html">Intro</a>
+      <a href="book/sommario.html">Sommario</a>
+      <a href="https://leanpub.com/pensare-con-gli-llm" target="_blank" rel="noopener">Libro</a>
+    </nav>
+  </header>
+
+  <!-- ===================== LANDING ===================== -->
+  <section id="landing">
+    <span class="pill">5 min · 4 domande · 1 punteggio</span>
+    <h1>Quanto sei pronto a <em>pensare con</em> un LLM?</h1>
+
+    <div class="hero">
+      <div class="hero-text">
+        <p class="lead">Due self-check gratuiti, basati sul libro <a href="https://leanpub.com/pensare-con-gli-llm" target="_blank" rel="noopener"><em>Pensare con gli LLM, the Right Way</em></a> di Francesco Fullone. In 5 minuti ti restituiscono una mappa onesta della tua postura cognitiva: dove regge, dove scivola sotto pressione, da dove conviene ripartire.</p>
+        <p>Scegli il taglio. <strong>Organizzativo</strong>, sulle 4 decisioni che ogni team dovrebbe aver preso esplicitamente. <strong>Personale</strong>, sui 3 vertici del professionista che apre una sessione con un LLM — più la mappa che li tiene insieme.</p>
+      </div>
+      <a class="hero-cover" href="https://leanpub.com/pensare-con-gli-llm" target="_blank" rel="noopener" aria-label="Pensare con gli LLM, the Right Way — disponibile su LeanPub">
+        <img src="assets/copertina.jpg" alt="Copertina del libro «Pensare con gli LLM, the Right Way» di Francesco Fullone" width="200" height="300" />
+        <span class="caption">Disponibile su LeanPub →</span>
+      </a>
+    </div>
+
+    <div class="pick">
+      <div class="card" data-start="A" role="button" tabindex="0">
+        <span class="tag">A · Organizzazione</span>
+        <h3>Pensare-Con Readiness</h3>
+        <p>4 decisioni esplicite di governance prima di integrare l'AI: <strong>cosa delegare, come verificare, chi firma, quale soglia</strong>. Per team, manager, responsabili compliance.</p>
+        <div class="meta">Output → Pensare-Con Gap (alto/medio/basso/maturo) + capitoli da leggere.</div>
+      </div>
+      <div class="card" data-start="B" role="button" tabindex="0">
+        <span class="tag">B · Individuo</span>
+        <h3>Triangolo Self-Check</h3>
+        <p>3 vertici del professionista che apre una sessione LLM: <strong>Intento, Avversario, Editore</strong> — più la <strong>Mappa</strong> orologi/nuvole × verità/conferma. Per chi pensa con LLM da solo.</p>
+        <div class="meta">Output → profilo di collasso (quale vertice scivola per primo) + esercizi mirati.</div>
+      </div>
+    </div>
+
+    <p style="font-size:14px;color:var(--ink-soft);">I tuoi dati restano nel browser. Nessuna registrazione, nessun tracking. Il codice è <a href="https://github.com/fullo/the-right-way" target="_blank" rel="noopener">open source</a>.</p>
+  </section>
+
+  <!-- ===================== QUIZ ===================== -->
+  <section id="quiz" class="hidden">
+    <div class="progress">
+      <div class="bar"><span id="bar-fill" style="width:0%"></span></div>
+      <span id="progress-label">1 / 4</span>
+    </div>
+
+    <div class="card question">
+      <div class="dim" id="q-dim">DIMENSIONE</div>
+      <div class="q" id="q-text">Domanda…</div>
+      <div class="sub" id="q-sub"></div>
+      <div class="scale" id="q-scale"></div>
+    </div>
+
+    <div class="actions">
+      <button class="ghost" id="btn-back">← Indietro</button>
+      <button id="btn-next" disabled>Avanti →</button>
+    </div>
+  </section>
+
+  <!-- ===================== RESULT ===================== -->
+  <section id="result" class="hidden result">
+    <div class="card score-block">
+      <div class="label" id="r-title">Risultato</div>
+      <div><span class="value" id="r-score">0</span><span class="max">/20</span></div>
+      <div class="level" id="r-level">—</div>
+    </div>
+
+    <div class="card" style="margin-top:20px;">
+      <h2 id="r-headline">—</h2>
+      <p id="r-summary">—</p>
+
+      <div class="breakdown" id="r-breakdown"></div>
+
+      <div class="reco">
+        <h3>Da dove ripartire</h3>
+        <ul id="r-reco"></ul>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="ghost" id="btn-restart">↺ Ricomincia</button>
+      <a class="btn cta" href="https://leanpub.com/pensare-con-gli-llm" target="_blank" rel="noopener">Leggi il libro →</a>
+    </div>
+  </section>
+
+  <footer class="site">
+    <p>«Pensare con gli LLM, the Right Way» — Francesco Fullone, Daruma Consulting. Contenuti del libro CC BY-NC-SA 4.0. Codice dell'app MIT. Ispirato all'<a href="https://github.com/sw-craftsmanship-dojo/sw-ai-readiness-assessment" target="_blank" rel="noopener">AI Readiness Assessment</a> di SW Craftsmanship Dojo / BriX Consulting.</p>
+  </footer>
+</div>
+
+<script>
+// ===================== DATA =====================
+const ASSESSMENTS = {
+  A: {
+    title: "Pensare-Con Readiness",
+    intro: "Le 4 decisioni esplicite di governance, applicate al tuo team o alla tua organizzazione.",
+    questions: [
+      {
+        dim: "Delega",
+        q: "Cosa state delegando all'LLM?",
+        sub: "Quando un collega apre una sessione LLM per un task lavorativo, c'è una regola scritta che distingue cosa può delegare al modello (nuvola) da cosa deve fare da sé (orologio)?",
+        scale: [
+          "Nessuna regola: ognuno decide a istinto.",
+          "Linea guida verbale, informale.",
+          "Esiste un documento, applicato a macchia.",
+          "Documento applicato dalla maggioranza.",
+          "Criteri espliciti, conosciuti, applicati, aggiornati."
+        ]
+      },
+      {
+        dim: "Verifica",
+        q: "Come verificate prima di accettare un output?",
+        sub: "Per un output critico (che va al cliente, in produzione, in un documento firmato), esiste un protocollo di verifica esplicito che il responsabile deve seguire?",
+        scale: [
+          "Nessuno verifica: si pubblica e si vede.",
+          "Si controlla «a occhio», senza metodo.",
+          "C'è una checklist informale.",
+          "Protocollo formale, ma non sempre applicato.",
+          "Protocollo formale + traccia documentale per ogni output."
+        ]
+      },
+      {
+        dim: "Responsabilità",
+        q: "Chi firma — nome e cognome?",
+        sub: "Per ogni output LLM che esce dall'organizzazione c'è una persona identificabile che firma e risponde?",
+        scale: [
+          "Nessuno firma davvero.",
+          "Firma generica («il team», «l'azienda»).",
+          "Il manager firma ma non legge.",
+          "Chi produce firma, in modo coerente.",
+          "Firma + capacità documentata di difendere l'output."
+        ]
+      },
+      {
+        dim: "Soglia",
+        q: "Quando vi fermate?",
+        sub: "Avete sentinel — metriche, eventi, segnali — che vi dicono quando fermare o ricalibrare l'uso dell'LLM su un caso d'uso?",
+        scale: [
+          "Nessuna soglia, si va finché non scoppia qualcosa.",
+          "Ci si ferma solo dopo lamentele esplicite.",
+          "Review trimestrale, post-hoc.",
+          "KPI definiti con threshold di allerta.",
+          "Sentinel + procedura di stop documentata e provata."
+        ]
+      }
+    ],
+    chapters: {
+      Delega: { ref: "Cap 1 · Orologi, nuvole e LLM", file: "book/06-chiudere-il-gap.html" },
+      Verifica: { ref: "Cap 5 · La pratica avversariale", file: "book/06-chiudere-il-gap.html" },
+      Responsabilità: { ref: "Cap 2 · Il Triangolo del Pensare-Con (vertice Editore)", file: "book/06-chiudere-il-gap.html" },
+      Soglia: { ref: "Cap 8 §8.1 · Segnali di adozione (leading, sentinel, lagging)", file: "book/06-chiudere-il-gap.html" }
+    }
+  },
+
+  B: {
+    title: "Triangolo Self-Check",
+    intro: "I 3 vertici del Triangolo del Pensare-Con + la Mappa orologi/nuvole × verità/conferma.",
+    questions: [
+      {
+        dim: "Intento",
+        q: "Sai cosa cerchi prima del primo prompt?",
+        sub: "Quando apri una sessione LLM per un task non banale, sai formulare in una frase cosa cerchi e perché — prima di scrivere il primo prompt?",
+        scale: [
+          "Mai. Scopro mentre scrivo il prompt.",
+          "Raramente. Parto e vediamo.",
+          "A volte, sui task più importanti.",
+          "Spesso. Mi obbligo a formulare prima.",
+          "Sempre. È il mio primo passo, esplicito."
+        ]
+      },
+      {
+        dim: "Avversario",
+        q: "Costruisci la verifica prima di accettare?",
+        sub: "Prima di accettare un output LLM su cui poggia una decisione, costruisci la verifica (test, fact-check, controesempio, Chain-of-Verification)?",
+        scale: [
+          "Mai. Se «suona bene», va bene.",
+          "Solo se intuisco un problema.",
+          "A volte, in modo improvvisato.",
+          "Spesso, in modo strutturato.",
+          "Sempre, con un metodo (CoVe, triade abduzione/deduzione/induzione)."
+        ]
+      },
+      {
+        dim: "Editore",
+        q: "Puoi firmare e difendere quello che pubblichi?",
+        sub: "Quando pubblichi o consegni qualcosa prodotto con LLM, potresti spiegare e difendere ogni scelta a un esperto di dominio?",
+        scale: [
+          "No, copio-incollo e spero.",
+          "Solo per i pezzi più visibili.",
+          "Per i pezzi che ho riletto.",
+          "Sì, sostanzialmente sì.",
+          "Sì, su tutto: la firma è mia e la posso difendere."
+        ]
+      },
+      {
+        dim: "Mappa",
+        q: "Riconosci dove sei prima di scrivere il prompt?",
+        sub: "Sai dire se il task è orologio o nuvola, e se stai cercando verità o conferma — prima di scrivere il primo prompt?",
+        scale: [
+          "Non ci penso. Scrivo il prompt e basta.",
+          "Ci penso solo dopo, se l'output mi spiazza.",
+          "A volte prima, sui task complessi.",
+          "Spesso prima, in modo deliberato.",
+          "Sempre prima. È un check esplicito."
+        ]
+      }
+    ],
+    chapters: {
+      Intento:    { ref: "Cap 2 · Il Triangolo (vertice Intento)", file: "book/06-chiudere-il-gap.html" },
+      Avversario: { ref: "Cap 5 · La pratica avversariale", file: "book/06-chiudere-il-gap.html" },
+      Editore:    { ref: "Cap 2 §2.3 · Il vertice Editore + Cap 8 · Non farsi usare", file: "book/06-chiudere-il-gap.html" },
+      Mappa:      { ref: "Cap 1 · Orologi, nuvole e LLM", file: "book/06-chiudere-il-gap.html" }
+    }
+  }
+};
+
+// ===================== STATE =====================
+const state = {
+  type: null,        // 'A' | 'B'
+  idx: 0,
+  answers: [],       // array of 1..5
+};
+
+// ===================== DOM =====================
+const $ = (id) => document.getElementById(id);
+const landing = $("landing"), quiz = $("quiz"), result = $("result");
+
+// ===================== LANDING → QUIZ =====================
+document.querySelectorAll("[data-start]").forEach(el => {
+  const start = () => begin(el.getAttribute("data-start"));
+  el.addEventListener("click", start);
+  el.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); start(); } });
+});
+
+function begin(type) {
+  state.type = type;
+  state.idx = 0;
+  state.answers = [];
+  landing.classList.add("hidden");
+  result.classList.add("hidden");
+  quiz.classList.remove("hidden");
+  render();
+}
+
+// ===================== QUIZ RENDER =====================
+function render() {
+  const a = ASSESSMENTS[state.type];
+  const q = a.questions[state.idx];
+  $("q-dim").textContent = q.dim.toUpperCase();
+  $("q-text").textContent = q.q;
+  $("q-sub").textContent = q.sub;
+
+  const scale = $("q-scale");
+  scale.innerHTML = "";
+  q.scale.forEach((label, i) => {
+    const lvl = i + 1;
+    const id = `opt-${lvl}`;
+    const wrap = document.createElement("label");
+    wrap.setAttribute("for", id);
+    if (state.answers[state.idx] === lvl) wrap.classList.add("selected");
+    wrap.innerHTML = `
+      <input type="radio" name="answer" id="${id}" value="${lvl}" ${state.answers[state.idx] === lvl ? "checked" : ""}/>
+      <span class="lvl">${lvl}</span>
+      <span class="txt">${label}</span>
+    `;
+    wrap.addEventListener("click", () => {
+      state.answers[state.idx] = lvl;
+      document.querySelectorAll(".scale label").forEach(l => l.classList.remove("selected"));
+      wrap.classList.add("selected");
+      $("btn-next").disabled = false;
+    });
+    scale.appendChild(wrap);
+  });
+
+  // progress
+  const pct = (state.idx / a.questions.length) * 100;
+  $("bar-fill").style.width = pct + "%";
+  $("progress-label").textContent = `${state.idx + 1} / ${a.questions.length}`;
+
+  // buttons
+  $("btn-back").style.visibility = state.idx === 0 ? "hidden" : "visible";
+  $("btn-next").textContent = state.idx === a.questions.length - 1 ? "Vedi il risultato →" : "Avanti →";
+  $("btn-next").disabled = !state.answers[state.idx];
+}
+
+$("btn-back").addEventListener("click", () => {
+  if (state.idx > 0) { state.idx--; render(); }
+});
+$("btn-next").addEventListener("click", () => {
+  const a = ASSESSMENTS[state.type];
+  if (!state.answers[state.idx]) return;
+  if (state.idx < a.questions.length - 1) { state.idx++; render(); }
+  else { showResult(); }
+});
+
+// ===================== RESULT =====================
+function showResult() {
+  const a = ASSESSMENTS[state.type];
+  const score = state.answers.reduce((s, v) => s + v, 0);
+  const max = a.questions.length * 5;
+
+  let levelKey, levelTxt, headline, summary;
+  if (score <= 8) {
+    levelKey = "high"; levelTxt = "Gap alto";
+    headline = "Stai pensando per conto dell'LLM, non con l'LLM.";
+    summary = "Nessuno dei 4 presidi è in posto. Non è una bocciatura: è la condizione di partenza di chi sta adottando LLM senza una postura critica. Buona notizia: ogni domanda con punteggio basso indica un capitolo concreto da cui ripartire.";
+  } else if (score <= 13) {
+    levelKey = "med"; levelTxt = "Gap medio";
+    headline = "Una postura c'è, ma scivola sotto pressione.";
+    summary = "Hai presidi parziali. Il rischio è che funzionino nei casi facili e collassino in quelli difficili — proprio quando servono. La dimensione con punteggio più basso ti dice dove il prossimo errore strutturale si annida.";
+  } else if (score <= 17) {
+    levelKey = "low"; levelTxt = "Gap basso";
+    headline = "Postura solida. Il prossimo livello è la consistenza.";
+    summary = "Le decisioni esplicite sono presenti. Il passaggio successivo è renderle abituali sotto stanchezza, fretta e pressione del calendario — la condizione in cui l'LLM «aiuta» di più, e va presidiato di più.";
+  } else {
+    levelKey = "mature"; levelTxt = "Pratica matura";
+    headline = "Stai pensando con l'LLM, non per suo conto.";
+    summary = "Risultato raro. Verifica che non sia auto-indulgenza: rifai il check fra 30 giorni su un caso reale, non in astratto, e confronta con un collega che misura le stesse cose. La maturità si dimostra in pubblico, non sul foglio.";
+  }
+
+  $("r-title").textContent = a.title;
+  $("r-score").textContent = score;
+  $("r-level").textContent = levelTxt;
+  $("r-level").className = "level " + levelKey;
+  $("r-headline").textContent = headline;
+  $("r-summary").textContent = summary;
+
+  // Breakdown
+  const bd = $("r-breakdown");
+  bd.innerHTML = "";
+  a.questions.forEach((q, i) => {
+    const v = state.answers[i] || 0;
+    const row = document.createElement("div");
+    row.className = "row";
+    row.innerHTML = `
+      <div class="dim-name">${q.dim}</div>
+      <div class="meter"><span style="width:${(v/5)*100}%"></span></div>
+      <div class="num">${v}/5</div>
+    `;
+    bd.appendChild(row);
+  });
+
+  // Recommendations: lowest-scoring dimensions first
+  const ordered = a.questions
+    .map((q, i) => ({ dim: q.dim, v: state.answers[i] || 0 }))
+    .sort((x, y) => x.v - y.v);
+  const reco = $("r-reco");
+  reco.innerHTML = "";
+  ordered.slice(0, 2).forEach(({ dim, v }) => {
+    const ch = a.chapters[dim];
+    const li = document.createElement("li");
+    li.innerHTML = `<strong>${dim} (${v}/5)</strong> → <a href="${ch.file}">${ch.ref}</a>`;
+    reco.appendChild(li);
+  });
+
+  quiz.classList.add("hidden");
+  result.classList.remove("hidden");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+$("btn-restart").addEventListener("click", () => {
+  state.type = null; state.idx = 0; state.answers = [];
+  result.classList.add("hidden");
+  quiz.classList.add("hidden");
+  landing.classList.remove("hidden");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+</script>
+</body>
+</html>
